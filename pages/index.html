@@ -3,20 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anasayfa</title>
-</head>
-<body>
-    
-    <h3>Merhaba NodeJS</h3>
+    <title>AnaSayfa</title>
 
-    <h3>Form</h3>
-    <div>
-        <form action="" method="post">
-            <input type="text" name="kullanici">
-            <input type="text" name="password">
-            <button type="submit">Gönder</button>
-        </form>
+
+</head>
+
+
+<body>
+
+    
+    <h3>Merhaba Node.js</h3>
+    <p>Herkese selam Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut!</p>
+
+
+    <div id="user-container">
+
+
     </div>
 
+
+    <script>
+
+        // sayfa reload oldugunda
+        window.onload = async () => {
+
+                const request = await fetch("http://localhost:5000/api/v1/users")
+                const response = await request.json()
+                const div = document.querySelector("#user-container")
+
+                response.map(user => {
+                    
+                    div.innerHTML += `
+                    <a href="/users/${user.name}">
+                        <h3>${user.name}</h3>
+                    </a>
+                 
+                    `
+
+                })
+
+                console.log("BACKEND RESPONSE:", response)
+        }
+
+    </script>
 </body>
 </html>
