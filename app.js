@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended : true }))
 
 
 
-// Helper functions
+// Helper functions yaparak direkmen bulunan html dosyamızı koyuyoruz!
 const send_file_func = (file_name) => {
     return `${process.cwd()}/pages/${file_name}`
 }
@@ -22,7 +22,7 @@ const send_file_func = (file_name) => {
 app.get('/', (request , response) => {
 
     console.log(request.hostname);
-    // Eğer dosya yönlendireceksen
+    // Eğer dosya yönlendireceksen yani render etmesi için bir html yollayacaksan process.cwd() yani mevcut klasör yolunu verir kullanılır.
     response.sendFile(send_file_func("index.html"))
     // Json dönecekse
     response.json("Merhaba Dünya")
@@ -65,6 +65,9 @@ app.get('/user/:param', (request, response) => {
 
 app.post('/api/v1/post', (request, response) => {
 
+    // Veriler geliyor ancak console bastırıncı undefined oluyor bunu express ile çözüyoruz parse işlemi yaparak
+    // app.use(express.urlencoded({extended : true }))
+
     const {kullanici, password} = request.body
     console.log(request.body);
 
@@ -91,3 +94,4 @@ const port = 8000
 app.listen(port,() => {
     console.log(`Server Run: ${port} portunda çalışıyor`);
 })
+
